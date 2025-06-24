@@ -1,3 +1,11 @@
+<script setup>
+defineProps({
+  name: String,
+  email: String,
+  img: String
+});
+</script>
+
 <template>
   <li class="flex items-center gap-4 mb-4">
     <img
@@ -13,11 +21,3 @@
     </div>
   </li>
 </template>
-
-<script setup>
-defineProps({
-  name: String,
-  email: String,
-  img: String
-});
-</script>

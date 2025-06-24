@@ -1,9 +1,12 @@
 <script setup>
-import EmployeeListItem from  './components/EmployeeListItem.vue';
-import Button from './ui/Button.vue';
+import EmployeeList from  './components/EmployeeList.vue';
+import Pagination from './components/Pagination.vue';
 import { useEmployees } from './composables/useEmployees';
 
 const { employees, isLoading, error, nextPage, previousPage, skip } = useEmployees();
+
+document.title = 'Anställda';
+
 </script>
 
 <template>
@@ -17,19 +20,12 @@ const { employees, isLoading, error, nextPage, previousPage, skip } = useEmploye
         Laddar...
       </p>
       <p v-else-if="error">{{ error.message }}</p>
-      <ol v-else id="anstallda-list" class="list-decimal list-inside">
-        <EmployeeListItem
-          v-for="employee in employees"
-          :key="employee.id"
-          :name="`${employee.firstName} ${employee.lastName}`"
-          :email="employee.email"
-          :img="employee.image"
-        />
-      </ol>
+      <EmployeeList v-else :employees="employees" />
     </section>
-    <nav class="flex gap-4 mt-6" aria-label="Sidnavigering">
-      <Button @click="previousPage" :disabled="skip === 0">Föregående</Button>
-      <Button @click="nextPage">Nästa</Button>
-    </nav>
+    <Pagination
+      :onNext="nextPage"
+      :onPrev="previousPage"
+      :canPrev="skip > 0"
+    />
   </main>
 </template>
