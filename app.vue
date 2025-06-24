@@ -1,11 +1,14 @@
 <script setup>
+import { onMounted } from 'vue';
 import EmployeeList from  './components/EmployeeList.vue';
 import Pagination from './components/Pagination.vue';
 import { useEmployees } from './composables/useEmployees';
 
 const { employees, isLoading, error, nextPage, previousPage, skip } = useEmployees();
 
-document.title = 'Anställda';
+onMounted(() => {
+  document.title = 'Anställda';
+});
 
 </script>
 
