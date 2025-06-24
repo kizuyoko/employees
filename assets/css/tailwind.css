@@ -13,26 +13,25 @@
   h1, h2,
   button {
     font-family: 'Space Grotesk', sans-serif;
-    font-weight: 700;
-    line-height: 1.75rem;
+    font-weight: 600;
+    font-size: 1.2rem; /* 19.2px */
   }
   h1 {
     font-size: 2.25rem; /* 36px */
+    margin-bottom: 1.5rem; /* 24px */
   }
   h2 {
-    font-size: 1.5rem; /* 24px */
+    font-size: 1.6rem; /* 25.6px */
   }
-  nav, footer {
+  nav {
     font-family: 'Inter', sans-serif;
     font-weight: 600;
   }
-  header, footer {
-    @apply bg-slate-200 shadow text-2xl;
-  }
-  nav {
-    @apply bg-gray-200 shadow sm:shadow-none sm:bg-none hover:underline;
-  }
   button {
     @apply bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700;
+  }
+  a {
+    font-size: 1.2rem; /* 19.2px */
+    font-weight: 600;
   }
 }
