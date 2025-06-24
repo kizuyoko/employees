@@ -6,9 +6,15 @@ export function useEmployees() {
   const isLoading = ref(true);
   const error = ref<string | null>(null);
 
+  const limit = 6;
+  const skip = ref(0);
+
   const fetchEmployees = async () => {
+    isLoading.value = true;
+    error.value = null;
+
     try {
-      const response = await fetch('https://dummyjson.com/users?limit=6&skip=0')
+      const response = await fetch(`https://dummyjson.com/users?limit=${limit}&skip=${skip.value}`);
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
@@ -21,9 +27,18 @@ export function useEmployees() {
     }
   };
 
-  onMounted(() => {
+  watch(skip, () => {
     fetchEmployees();
-  });
+  }, { immediate: true });
 
-  return { employees, isLoading, error };
+  const nextPage = () => {
+    skip.value += limit;
+  };
+  const previousPage = () => {
+    if (skip.value >= limit) {
+      skip.value -= limit;
+    }
+  };
+
+  return { employees, isLoading, error, nextPage, previousPage, skip };
 }

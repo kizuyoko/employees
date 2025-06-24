@@ -3,7 +3,7 @@ import EmployeeListItem from  './components/EmployeeListItem.vue';
 import Button from './ui/Button.vue';
 import { useEmployees } from './composables/useEmployees';
 
-const { employees, isLoading, error } = useEmployees();
+const { employees, isLoading, error, nextPage, previousPage, skip } = useEmployees();
 </script>
 
 <template>
@@ -27,9 +27,9 @@ const { employees, isLoading, error } = useEmployees();
         />
       </ol>
     </section>
-    <nav class="flex gap-4 mt-4" aria-label="Sidnavigering">
-      <Button>Föregående</Button>
-      <Button>Nästa</Button>
+    <nav class="flex gap-4 mt-6" aria-label="Sidnavigering">
+      <Button @click="previousPage" :disabled="skip === 0">Föregående</Button>
+      <Button @click="nextPage">Nästa</Button>
     </nav>
   </main>
 </template>
