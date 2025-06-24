@@ -1,43 +1,29 @@
 <script setup>
 import EmployeeListItem from  './components/EmployeeListItem.vue';
 import Button from './ui/Button.vue';
+import { useEmployees } from './composables/useEmployees';
+
+const { employees, isLoading, error } = useEmployees();
 </script>
+
 <template>
   <main class="flex flex-col items-center justify-center w-auto p-4 mx-auto my-2">
     <header>
       <h1>Anställda</h1>
     </header>
     <section aria-labelledby="anstallda-list">
-      <ol id="anstallda-list" class="list-decimal list-inside">
+      <p  
+        v-if="isLoading" class="text-center">
+        Laddar...
+      </p>
+      <p v-else-if="error">{{ error.message }}</p>
+      <ol v-else id="anstallda-list" class="list-decimal list-inside">
         <EmployeeListItem
-          name="Emily Smith Johnson"
-          email="emily.johnson@x.dummyjson.com"
-          img="https://dummyjson.com/icon/emilys/128"
-        />
-        <EmployeeListItem
-          name="Michael Williams"
-          email="sophia.brown@x.dummyjson.com"
-          img="https://dummyjson.com/icon/michaelw/128"
-        />
-        <EmployeeListItem
-          name="Sophia Brown"
-          email="james.davis@x.dummyjson.com"
-          img="https://dummyjson.com/icon/sophiab/128"
-        />
-        <EmployeeListItem
-          name="James Davis"
-          email="emily.johnson@x.dummyjson.com"
-          img="https://dummyjson.com/icon/jamesd/128"
-        />
-        <EmployeeListItem
-          name="Emma Johnson Miller"
-          email="emily.johnson@x.dummyjson.com"
-          img="https://dummyjson.com/icon/emmaj/128"
-        />
-        <EmployeeListItem
-          name="Olivia Wilson"
-          email="emily.johnson@x.dummyjson.com"
-          img="https://dummyjson.com/icon/oliviaw/128"
+          v-for="employee in employees"
+          :key="employee.id"
+          :name="`${employee.firstName} ${employee.lastName}`"
+          :email="employee.email"
+          :img="employee.image"
         />
       </ol>
     </section>
