@@ -1,3 +1,6 @@
+# Live Demo #
+[Här](https://anstallda.netlify.app/)
+
 # KODUPPGIFT #
 På vår hemsida vill vi visa en lista över våra anställda (dummydata). Data kan hittas på följande slutpunkt: https://dummyjson.com/users?limit=6&skip=0
 
